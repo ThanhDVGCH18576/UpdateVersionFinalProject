@@ -1,0 +1,10 @@
+﻿body {
+}
+#left-aside{
+    height:300px;
+    background-color:aquamarine;
+}
+#main-content{
+    height:300px;
+    background-color:aqua;
+}

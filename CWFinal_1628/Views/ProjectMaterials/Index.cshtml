@@ -1,0 +1,110 @@
+﻿@model IEnumerable<CWFinal_1628.Models.ProjectMaterial>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .mid {
+        text-align: center;
+    }
+</style>
+<h2 class="mid">Assign Materials</h2>
+
+@if (User.IsInRole("Builder"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+    </p>
+}
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">List all assign Projects</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="alert-info">
+                    <tr>
+                        <th class="mid">
+                            @Html.DisplayNameFor(model => model.Material.MaterialName)
+                        </th>
+                        <th class="mid">
+                            @Html.DisplayNameFor(model => model.Project.ProjectName)
+                        </th>
+                        <th class="mid">
+                            @Html.DisplayNameFor(model => model.Date)
+                        </th>
+                        <th class="mid">
+                            @Html.DisplayNameFor(model => model.Quantity)
+                        </th>
+                        <th class="mid">
+                            @Html.DisplayNameFor(model => model.Comment)
+                        </th>
+                        <th class="mid">
+                            @Html.DisplayNameFor(model => model.Status)
+                        </th>
+                        @if (User.IsInRole("Builder") || (User.IsInRole("Supervisor")))
+                        {
+                            <th class="mid">Action</th>
+                        }
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Material.MaterialName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Project.ProjectName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Comment)
+                            </td>
+                            @if (item.Status == null)
+                            {
+                                <td style="color:blue;">
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                            }
+                            else if (item.Status == 0)
+                            {
+                                <td style="color: green;">
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="color: red;">
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                            }
+                            @if (User.IsInRole("Builder") || (User.IsInRole("Supervisor")))
+                            {
+                                <td class="mid">
+                                    <a href="@Url.Action("Edit", "ProjectMaterials", new { id = item.ProjectMaterialID })">
+                                        <i class="fas fa-edit btn btn-primary btn-sm"></i>
+                                    </a>
+                                    <a href="@Url.Action("Delete", "ProjectMaterials", new { id = item.ProjectMaterialID })">
+                                        <i class="fas fa-trash-alt btn btn-danger btn-sm"></i>
+                                    </a>
+                                </td>
+                            }
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

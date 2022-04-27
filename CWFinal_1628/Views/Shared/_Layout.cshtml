@@ -1,0 +1,513 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Building-Materials & Employment--@ViewBag.Title</title>
+    <!-- Custom fonts for this template-->
+    <link href="~/Theme/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="~/Theme/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/Theme/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="~/Scripts/script.js"></script>
+</head>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="~/Home/Index">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class='fas fa-cubes' style='font-size:60px'></i>
+                </div>
+                <div class="sidebar-brand-text mx-3"> 3 Plus <sup>+</sup></div>
+            </a>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="~/Home/Index">
+                    <i class="fas fa-house-user" style="font-size: 20px;"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin"))
+                {
+                    <hr class="sidebar-divider my-0">
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                           aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-user-alt" style="font-size: 20px;"></i>
+                            <span>Users Management</span>
+                        </a>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Stakeholders</h6>
+                                <a class="collapse-item" href="~/Builders/Index">Builders Management</a>
+                                <a class="collapse-item" href="~/Supervisors/Index">Supervisors Management</a>
+                                <a class="collapse-item" href="~/Investors/Index">Investors Management</a>
+                                <a class="collapse-item" href="~/Salesmen/Index">Salesmans Management</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                           aria-expanded="true" aria-controls="collapseThree">
+                            <i class="fas fa-baby-carriage" style="font-size: 20px;"></i>
+                            <span>Materials Management</span>
+                        </a>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/MaterialTypes/Index">Material Types</a>
+                                <a class="collapse-item" href="~/Materials/Index">Materials</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse1"
+                           aria-expanded="true" aria-controls="collapse1">
+                            <i class="fas fa-building" style="font-size: 20px;"></i>
+                            <span>Projects Management</span>
+                        </a>
+                        <div id="collapse1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/Projects/Index">List all</a>
+                                <a class="collapse-item" href="~/Projects/Create">Add new</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3"
+                           aria-expanded="true" aria-controls="collapse3">
+                            <i class="fas fa-tools" style="font-size: 20px;"></i>
+                            <span>Assign Projects</span>
+                        </a>
+                        <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/AssignProjects/Index">List all</a>
+                                <a class="collapse-item" href="~/AssignProjects/Create">Add new</a>
+                            </div>
+                        </div>
+                    </li>
+                }
+                else if (User.IsInRole("Supervisor"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2"
+                           aria-expanded="true" aria-controls="collapse2">
+                            <i class="fas fa-hammer" style="font-size: 20px;"></i>
+                            <span>Assign Materials</span>
+                        </a>
+                        <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/ProjectMaterials/Index">List all</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse5"
+                           aria-expanded="true" aria-controls="collapse5">
+                            <i class="far fa-calendar-alt" style="font-size: 20px;"></i>
+                            <span>Deadlines Management</span>
+                        </a>
+                        <div id="collapse5" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/Works/Index">List all</a>
+                                <a class="collapse-item" href="~/Works/Create">Add new</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3"
+                           aria-expanded="true" aria-controls="collapse3">
+                            <i class="fas fa-tools" style="font-size: 20px;"></i>
+                            <span>Projects</span>
+                        </a>
+                        <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/AssignProjects/Index">List all</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4"
+                           aria-expanded="true" aria-controls="collapse4">
+                            <i class="far fa-id-card" style="font-size: 20px;"></i>
+                            <span>View Invoices</span>
+                        </a>
+                        <div id="collapse4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/Invoices/Index">List all</a>
+                            </div>
+                        </div>
+                    </li>
+                }
+                else if (User.IsInRole("Salesman"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4"
+                           aria-expanded="true" aria-controls="collapse4">
+                            <i class="far fa-id-card" style="font-size: 20px;"></i>
+                            <span>Invoices Management</span>
+                        </a>
+                        <div id="collapse4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/Invoices/Index">List all</a>
+                                <a class="collapse-item" href="~/Invoices/Create">Add new</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2"
+                           aria-expanded="true" aria-controls="collapse2">
+                            <i class="fas fa-hammer" style="font-size: 20px;"></i>
+                            <span>View Materials</span>
+                        </a>
+                        <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/ProjectMaterials/Index">List all</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3"
+                           aria-expanded="true" aria-controls="collapse3">
+                            <i class="fas fa-tools" style="font-size: 20px;"></i>
+                            <span>Projects</span>
+                        </a>
+                        <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/AssignProjects/Index">List all</a>
+                            </div>
+                        </div>
+                    </li>
+
+                }
+                else if (User.IsInRole("Builder"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse5"
+                           aria-expanded="true" aria-controls="collapse5">
+                            <i class="far fa-calendar-alt" style="font-size: 20px;"></i>
+                            <span>Deadlines</span>
+                        </a>
+                        <div id="collapse5" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/Works/Index">List all</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2"
+                           aria-expanded="true" aria-controls="collapse2">
+                            <i class="fas fa-hammer" style="font-size: 20px;"></i>
+                            <span>Prepare Materials</span>
+                        </a>
+                        <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/ProjectMaterials/Index">List all</a>
+                                <a class="collapse-item" href="~/ProjectMaterials/Create">Add new material</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3"
+                           aria-expanded="true" aria-controls="collapse3">
+                            <i class="fas fa-tools" style="font-size: 20px;"></i>
+                            <span>Projects</span>
+                        </a>
+                        <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/AssignProjects/Index">List all</a>
+                            </div>
+                        </div>
+                    </li>
+                }
+                else if (User.IsInRole("Investor"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2"
+                           aria-expanded="true" aria-controls="collapse2">
+                            <i class="fas fa-hammer" style="font-size: 20px;"></i>
+                            <span>Materials</span>
+                        </a>
+                        <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/ProjectMaterials/Index">List all</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3"
+                           aria-expanded="true" aria-controls="collapse3">
+                            <i class="fas fa-tools" style="font-size: 20px;"></i>
+                            <span>Projects</span>
+                        </a>
+                        <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/AssignProjects/Index">List all</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4"
+                           aria-expanded="true" aria-controls="collapse4">
+                            <i class="far fa-id-card" style="font-size: 20px;"></i>
+                            <span>Invoices</span>
+                        </a>
+                        <div id="collapse4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Category</h6>
+                                <a class="collapse-item" href="~/Invoices/Index">List all</a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-dark topbar mb-4 static-top shadow text-white">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <!-- Topbar Search -->
+                    
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - User Information -->
+                        <!--<li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Duy Thanh</span>
+                                <img class="img-profile rounded-circle"
+                                     src="~/Content/images/h1.jpg">
+                            </a>-->
+                            <!-- Dropdown - User Information -->
+                            <!--<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>-->
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <!-- Content Row -->
+                    <div class="row">
+                        <div class="container body-content">
+                            @RenderBody()
+                            <hr />
+                        </div>
+                        @RenderSection("scripts", required: false)
+                    </div>
+                </div>
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="text-center text-lg-start bg-light">
+                <!-- Section: Social media -->
+                <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+                    <!-- Left -->
+                    <div class="me-5 d-none d-lg-block">
+                        <span>Social networks:</span>
+                    </div>
+                    <!-- Left -->
+                    <!-- Right -->
+                    <div style="margin-right:50%;">
+                        <a href="https://www.facebook.com/" style="margin-right:10px;" class="text-reset">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/" style="margin-right:10px;" class="text-reset">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://google.com/" style="margin-right:10px;" class="text-reset">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="https://instagram.com/" style="margin-right:10px;" class="text-reset">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <!-- Right -->
+                </section>
+                <!-- Section: Social media -->
+                <!-- Section: Links  -->
+                <section class="">
+                    <div class="container text-justify text-md-start mt-5">
+                        <!-- Grid row -->
+                        <div class="row mt-3">
+                            <!-- Grid column -->
+                            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                                <!-- Content -->
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    <i class="fas fa-gem me-3"></i>Construction 3 Plus
+                                </h6>
+                                <p>
+                                    3+'s mission is to be the leading 
+                                    company in professionalizing the civil
+                                    construction industry.
+                                </p>
+                            </div>
+                            <!-- Grid column -->
+                            <!-- Grid column -->
+                            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+        
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    Products
+                                </h6>
+                                <p>
+                                    <a href="#!" class="text-reset">Angular</a>
+                                </p>
+                                <p>
+                                    <a href="#!" class="text-reset">React</a>
+                                </p>
+                                <p>
+                                    <a href="#!" class="text-reset">Vue</a>
+                                </p>
+                                <p>
+                                    <a href="#!" class="text-reset">Laravel</a>
+                                </p>
+                            </div>
+                            <!-- Grid column -->
+                            <!-- Grid column -->
+                            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    Useful links
+                                </h6>
+                                <p>
+                                    <a href="#!" class="text-reset">Pricing</a>
+                                </p>
+                                <p>
+                                    <a href="#!" class="text-reset">Settings</a>
+                                </p>
+                                <p>
+                                    <a href="#!" class="text-reset">Orders</a>
+                                </p>
+                                <p>
+                                    <a href="#!" class="text-reset">Help</a>
+                                </p>
+                            </div>
+                            <!-- Grid column -->
+                            <!-- Grid column -->
+                            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                                <!-- Links -->
+                                <h6 class="text-uppercase fw-bold mb-4">
+                                    Contact
+                                </h6>
+                                <p><i class="fas fa-home me-3"></i> No.16 Thuy Khue, Tay Ho, HN</p>
+                                <p>
+                                    <i class="fas fa-envelope me-3"></i>
+                                    xaydung3cong@gmail.com
+                                </p>
+                                <p><i class="fas fa-phone me-3"></i> 0242 248 9797</p>
+                                <p><i class="fas fa-print me-3"></i> 0988 961 866</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="text-center text-light p-4" style="background-color: rgba(0, 0, 0, 0.5);">
+                    <a class="text-reset fw-bold" href="https://xaydung3cong.com/" >&copy; @DateTime.Now.Year Copyright by Construction Building 3 Plus</a>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="~/Account/Login">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Theme/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Theme/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Theme/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Theme/js/sb-admin-2.min.js"></script>
+
+    <script src="~/Theme/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Theme/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Theme/js/demo/datatables-demo.js"></script>
+</body>
+</html>

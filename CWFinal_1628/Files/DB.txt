@@ -1,0 +1,33 @@
+create table: 
+
++projet: ID
+Localtion
+start date
+end datedecription
+saleID
+
++Project builder
+ProjectID
+BuilderID
+
++projectMaterial
+ProjectID
+MaterialID
+Date
+Quantity
+BuilderID
+
++Builder
+BuilderID
+Email
+Phone
+Imge
+
++Material
+MaterialID
+Code
+Name
+
++Material Type
+TypeID
+TypeName

@@ -1,0 +1,42 @@
+﻿@model CWFinal_1628.Models.AssignProject
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details Assign Project</h2>
+ 
+<div>
+    <table class="table table-bordered">
+        
+        <tr class="btn-info text-center">
+            <th>Project Name</th>
+            <th>Salesmans</th>
+            <th>Supervisor</th>
+            <th>Builder</th>
+            <th>Investors</th>
+            <th>Location</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Type Project</th>
+        </tr>
+        <tr style="font-size:15px; color:black;">
+            <td>@Html.DisplayFor(model => model.Project.ProjectName)</td>
+            <td>@Html.DisplayFor(model => model.Project.Salesman.FullName)</td>
+            <td>@Html.DisplayFor(model => model.Supervisor.FullName)</td>
+            <td>@Html.DisplayFor(model => model.Builder.FullName)</td>
+            <td>@Html.DisplayFor(model => model.Project.Investor.FullName)</td>
+            <td>@Html.DisplayFor(model => model.Project.Location)</td>
+            <td>@Html.DisplayFor(model => model.Project.StartDate)</td>
+            <td>@Html.DisplayFor(model => model.Project.EndDate)</td>
+            <td>@Html.DisplayFor(model => model.Project.TypeProject)</td>
+        </tr>
+    </table>
+</div>
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.AssignID }, new { @class = "btn btn-primary" })
+    }
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-warning" })
+</p>

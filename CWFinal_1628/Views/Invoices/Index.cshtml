@@ -1,0 +1,118 @@
+﻿
+@model IEnumerable<CWFinal_1628.Models.Invoice>
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .mid {
+        text-align: center;
+    }
+</style>
+<h2 class="mid">List all invoices</h2>
+
+<body>
+    @if (User.IsInRole("Salesman"))
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create", null, new { @class = " btn  btn-success" })
+        </p>
+    }
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">List all Invoices</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="alert-info">
+                        <tr>
+                            <th class="mid">
+                                Project Name
+                            </th>
+                            <th>
+                                Salesman
+                            </th>
+                            <th class="mid">
+                                Invoice Name
+                            </th>
+                            <th class="mid">
+                                Date Submit
+                            </th>
+                            <th class="mid">
+                                Location
+                            </th>
+                            <th class="mid">
+                                Total
+                            </th>
+                            <th class="mid">
+                                Invoice File
+                            </th>
+                            <th class="mid">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Project.ProjectName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Project.Salesman.FullName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.InvoiceName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateSubmit)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Location)
+                                </td>
+                                @if (item.Total >= 10000)
+                                {
+                                    <td style="color:red;">
+                                        @Html.DisplayFor(modelItem => item.Total)
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Total)
+                                    </td>
+                                }
+
+                                <td>
+                                    @Html.ActionLink("Download", "DownloadFile", new { fileName = item.InvoiceFile }, new { @class = "fas fa-download " })
+                                </td>
+                                <td class="mid">
+
+                                    @if (User.IsInRole("Salesman"))
+                                    {
+                                        <a href="@Url.Action("Edit", "Invoices", new { id = item.ID })">
+                                            <i class="fas fa-edit btn btn-primary btn-sm"></i>
+                                        </a>
+
+                                        <a href="@Url.Action("Delete", "Invoices", new { id = item.ID })">
+                                            <i class="fas fa-trash-alt btn btn-danger btn-sm"></i>
+                                        </a>
+                                    }
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th style="color:black" colspan="5">Sum Total Money:</th>
+                            <th style="color:black">@Model.Sum(i => i.Total)$ </th>
+                            <th colspan="2"></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
