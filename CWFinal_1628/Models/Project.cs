@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Foolproof;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,7 +12,7 @@ namespace CWFinal_1628.Models
     {
         NewBuild, Repair
     }
-    public class Project
+    public class Project : IValidatableObject
     {
         [Key]
         public int ProjetcID { get; set; }
@@ -34,6 +35,7 @@ namespace CWFinal_1628.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "End Date")]
+        [GreaterThan("StartDate")]
         public DateTime EndDate { get; set; }
 
         [StringLength(200)]
@@ -57,5 +59,13 @@ namespace CWFinal_1628.Models
         public virtual ICollection<ProjectMaterial> ProjectMaterials { get; set; }
         public virtual ICollection<Work> Works { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
+
+        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        {
+            if (EndDate < StartDate)
+            {
+                yield return new ValidationResult("EndDate must be greater than StartDate");
+            }
+        }
     }
 }
