@@ -59,14 +59,14 @@
                                     @Html.DisplayFor(modelItem => item.Project.ProjectName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Project.ProjectName)
+                                    @Html.DisplayFor(modelItem => item.Supervisor.FullName)
                                 </td>
 
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Supervisor.FullName)
+                                    @Html.DisplayFor(modelItem => item.Project.Investor.FullName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Project.Investor.FullName)
+                                    @Html.DisplayFor(modelItem => item.Project.Salesman.FullName)
                                 </td>
                                 <td class="mid">
                                     @if (User.IsInRole("Admin"))
