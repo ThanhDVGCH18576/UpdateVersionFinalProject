@@ -1,4 +1,4 @@
-﻿using Foolproof;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +12,7 @@ namespace CWFinal_1628.Models
     {
         NewBuild, Repair
     }
-    public class Project : IValidatableObject
+    public class Project: IValidatableObject
     {
         [Key]
         public int ProjetcID { get; set; }
@@ -35,7 +35,6 @@ namespace CWFinal_1628.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "End Date")]
-        [GreaterThan("StartDate")]
         public DateTime EndDate { get; set; }
 
         [StringLength(200)]
