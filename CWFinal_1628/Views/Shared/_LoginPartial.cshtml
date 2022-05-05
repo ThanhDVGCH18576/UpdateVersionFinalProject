@@ -5,15 +5,43 @@
     {
         @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li class="btn btn-light btn-sm " style="margin-right:10px;">
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+     @*   <ul class="nav navbar-nav navbar-right">
+                <li class="btn btn-light btn-sm " style="margin-right:10px;">
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                <li><a class="btn btn-warning btn-sm" href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+            </ul>*@
+    <ul class="navbar-nav ml-auto">
+        <li style="margin-top:20px;">
+            @("Hello " + User.Identity.GetUserName() + "!")
         </li>
-        <li><a class="btn btn-warning btn-sm" href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                <img class="img-profile rounded-circle"
+                     src="~/Theme/img/undraw_profile.svg">
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                 aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="~/Manage/ChangePassword">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Change Password
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+
+        </li>
     </ul>
     }
 
-    
+
 }
 else
 {
