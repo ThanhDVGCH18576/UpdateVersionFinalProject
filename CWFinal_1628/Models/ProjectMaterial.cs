@@ -26,14 +26,14 @@ namespace CWFinal_1628.Models
 
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Date")]
         public DateTime Date { get; set; }
 
         [Required]
-        [StringLength(20), MinLength(1)]
+        [RegularExpression("([1-9][0-9]*)", ErrorMessage = "Quantity must be a natural number")]
         [Display(Name ="Quantity")]
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
 
         [StringLength(200)]
         [Display(Name = "Comment")]

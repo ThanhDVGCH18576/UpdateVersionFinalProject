@@ -28,7 +28,7 @@ namespace CWFinal_1628.Models
         public string InvoiceFile { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required]
         [Display(Name = "Submission Date")]
         public DateTime DateSubmit { get; set; }

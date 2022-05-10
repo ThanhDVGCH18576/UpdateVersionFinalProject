@@ -28,12 +28,12 @@ namespace CWFinal_1628.Models
         public string Location { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name ="Start Date")]
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
 
@@ -61,9 +61,9 @@ namespace CWFinal_1628.Models
 
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            if (EndDate < StartDate)
+            if (EndDate < StartDate || EndDate == StartDate)
             {
-                yield return new ValidationResult("EndDate must be greater than StartDate");
+                yield return new ValidationResult("End Date must be greater than Start Date");
             }
         }
     }
