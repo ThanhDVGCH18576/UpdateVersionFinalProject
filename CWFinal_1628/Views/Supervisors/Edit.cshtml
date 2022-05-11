@@ -63,7 +63,7 @@
             <div class="form-group">
                 <div class="col-md-10">
                     <img src="@Url.Content(Model.Image)" style="height: 300px; width: 300px; margin: 5px; border-radius: 15px;" id="previewImage" />
-                    <input type="file" name="ImageUpload" required onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
+                    <input type="file" name="ImageUpload"  onchange="ShowImagePreview(this, document.getElementById('previewImage'))" />
                     @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
                 </div>
             </div>

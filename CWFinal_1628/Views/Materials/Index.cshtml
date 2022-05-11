@@ -32,7 +32,7 @@
                             @Html.DisplayNameFor(model => model.MaterialCode)
                         </th>
                         <th class="mid">
-                            @Html.DisplayNameFor(model => model.Description)
+                            @Html.DisplayNameFor(model => model.UnitMeasure)
                         </th>
                         <th class="mid">Action</th>
                     </tr>
@@ -51,7 +51,7 @@
                                 @Html.DisplayFor(modelItem => item.MaterialCode)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Description)
+                                @Html.DisplayFor(modelItem => item.UnitMeasure)
                             </td>
                             <td class="mid">
                                 <a href="@Url.Action("Edit", "Materials", new { id = item.MaterialID })">

@@ -24,8 +24,8 @@ namespace CWFinal_1628.Models
 
         [Required]
         [StringLength(100)]
-        [Display(Name = "Description")]
-        public string Description { get; set; }
+        [Display(Name = "Unit Measure")]
+        public string UnitMeasure { get; set; }
 
         [ForeignKey("MaterialType")]
         public int MaterialTypeID { get; set; }

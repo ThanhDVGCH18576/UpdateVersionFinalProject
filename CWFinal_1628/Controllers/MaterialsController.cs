@@ -36,7 +36,7 @@ namespace CWFinal_1628.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaterialID,MaterialName,MaterialCode,Description,MaterialTypeID")] Material material)
+        public ActionResult Create([Bind(Include = "MaterialID,MaterialName,MaterialCode,UnitMeasure,MaterialTypeID")] Material material)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +71,7 @@ namespace CWFinal_1628.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaterialID,MaterialName,MaterialCode,Description,MaterialTypeID")] Material material)
+        public ActionResult Edit([Bind(Include = "MaterialID,MaterialName,MaterialCode,UnitMeasure,MaterialTypeID")] Material material)
         {
             if (ModelState.IsValid)
             {

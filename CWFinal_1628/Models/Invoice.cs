@@ -27,12 +27,13 @@ namespace CWFinal_1628.Models
         [Display(Name = "Invoice File")]
         public string InvoiceFile { get; set; }
 
+        [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Required]
         [Display(Name = "Submission Date")]
         public DateTime DateSubmit { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string Location { get; set; }
 

@@ -19,6 +19,8 @@
         </p>
     }
 
+
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">List all Invoices</h6>
@@ -49,7 +51,11 @@
                             <th class="mid">
                                 Invoice File
                             </th>
-                            <th class="mid">Action</th>
+                            @if (User.IsInRole("Salesman"))
+                            {
+                                <th class="mid">Action</th>
+                            }
+
                         </tr>
                     </thead>
                     <tbody>
@@ -87,10 +93,10 @@
                                 <td>
                                     @Html.ActionLink("Download", "DownloadFile", new { fileName = item.InvoiceFile }, new { @class = "fas fa-download " })
                                 </td>
-                                <td class="mid">
+                                @if (User.IsInRole("Salesman"))
+                                {
+                                    <td class="mid">
 
-                                    @if (User.IsInRole("Salesman"))
-                                    {
                                         <a href="@Url.Action("Edit", "Invoices", new { id = item.ID })">
                                             <i class="fas fa-edit btn btn-primary btn-sm"></i>
                                         </a>
@@ -98,9 +104,8 @@
                                         <a href="@Url.Action("Delete", "Invoices", new { id = item.ID })">
                                             <i class="fas fa-trash-alt btn btn-danger btn-sm"></i>
                                         </a>
-                                    }
-
-                                </td>
+                                    </td>
+                                }
                             </tr>
                         }
                     </tbody>
